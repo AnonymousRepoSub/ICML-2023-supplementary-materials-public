@@ -1,16 +1,18 @@
 # HyperTime: Hyperparameter Optimization for Combating Temporal Distribution Shifts
 
-## **Notice**
+<!-- ## **Notice**
 
-We will continue to verify the effectiveness of HyperTime on more datasets and learners and update the correponding results in the future in this page. 
+We will continue to verify the effectiveness of HyperTime on more datasets and learners and update the correponding results in the future in this page.  -->
 
-## Introduce
+## Introduction
+
 This repository is the implementation of ICML submission **HyperTime: Hyperparameter Optimization for Combating Temporal Distribution Shifts**. 
 
 The implementation of our method HyperTime is built upon an open-source AutoML library named FLAML. Thus the submitted code includes part of flaml’s code. But we emphasize that the contributors and copyright information about the open-source library FLAML do not necessarily reveal the identities of the authors of this work. We plan to open source the code accompanying the formal publication of this paper.
 
 This version of the code is made to facilitate the peer review of the ICML 2023 submission of our paper. 
 We plan to release the code accompanying the formal publication of this paper. 
+We will continue to verify the effectiveness of HyperTime on more datasets and learners and update the correponding results in the future in this page.
 
 ## Datasets
 
@@ -64,54 +66,76 @@ pip install -r requirements.txt
 ### **How to run** 
 
 1. **Main experiments**
+    - Tabular Data
+
+	```python
+	# Run single train
+	python exp_tabular/main.py  --algorithm 'hypertime' \
+                	--dataset 'electricity' \
+                	--estimator 'xgboost' \
+                	--metric 'roc_auc' \
+                	--budget 7200 \
+                	--seed 1 &
+
+	# Run single test
+	python exp_tabular/test.py --algorithm 'hypertime' \
+                	--dataset 'electricity' \
+                	--estimator 'xgboost' \
+	               	--metric 'roc_auc' \
+                	--budget 7200 \
+                	--seed 1 &
+
+	#Run batch train
+	bash scripts/run_electricity.sh
+
+	#Run batch test
+	bash scripts/run_test.sh
+	```
+
+    It will run HyperTime on electricity with XGboost. The time budget is 7200.
+
+
+    - YearBook 
 
     ```python
-    python main.py --dataset DATASET --estimator ESTIMATOR --metric METRIC --budget BUDGET --algorithm ALGORITHM --seed SEED
-    ```
+    # Search HPs
+    python exp_yearbook/main.py --dataset yearbook \
+                                --estimator nn \
+                                --metric accuracy \ 
+                                --budget 10800 \ 
+                                --algorithm cfo \
+                                --seed 0 &
 
-    Example 1, 
-
-    ```python
-    python main.py --dataset electricity --estimator xgboost --metric roc_auc --budget 7200 --algorithm HyperTime --seed 0
-    ```
-
-    It will run HyperTime on electricity with XGboost. The time budget is 10000s.
-
-
-    Example 2,
-
-    ```python
-    python main.py --dataset yearbook --estimator nn --metric accuracy --budget 10800 --algorithm cfo --seed 0
+    # Test
+    python exp_yearbook/test.py --dataset yearbook \
+                                --estimator nn \
+                                --metric accuracy \ 
+                                --budget 10800 \
+                                --algorithm cfo \
     ```
 
     It will run cfo on yearbook with Neural networks. The time budget is 10800s.
 
 
-2. **Ablation study**
-
-
-3. **Combining HPO algorithms with robust training method LISA**
+2. **Combining HPO algorithms with robust training method LISA**
 
     ```python
-    python combine.py --budget BUDGET --algorithm ALGORITHM --seed SEED 
-    ```
-
-    Example, 
-
-    ```python
-    python combine.py --budget 10800 --algorithm cfo --seed 0
+    python Tune-Lisa/yearbook.py --budget 10800  \
+                                 --hpo_method HyperTime \ 
+                                 --seed 0 \  
+                                 --device 0 \
     ```    
 ## Results - Effectiveness
 
 1. **Results on tuning tree-based learners**
 
     <p float="left">
-    <img src="./Results/tabular_table.png" alt="alt text">
+    <img src="./Results/tab_table.png" alt="alt text">
     </p>
 
 
     <p float="left">
-    <img src="./Results/tabular_folds.png" alt="alt text">
+    <img src="./Results/tab_fig.png" alt="alt text">
     </p>
     
     <!-- <p float="left">
@@ -119,7 +143,7 @@ pip install -r requirements.txt
     </p> -->
 
 
-1. **Results on tuning neural networks**
+2. **Results on tuning neural networks**
 
     <p float="left">
     <img src="./Results/image_table.png" alt="alt text">
@@ -132,13 +156,27 @@ pip install -r requirements.txt
 
 ## Results - Ablation
 
+1. **The construction of validation sets**
+   
+    <p float="left">
+    <img src="./Results/abla1.png" alt="alt text">
+    </p>
 
+2. **The orientation of optimization objectives**
+
+    <p float="left">
+    <img src="./Results/abla2.png" alt="alt text">
+    </p>
 
 
 ## Results - Combining with robust training method
 
 <p float="middle">
-<img src="./Results/combining.png" alt="alt text">
+<img src="./Results/combine_tab.png" alt="alt text">
+</p>
+
+<p float="middle">
+<img src="./Results/combine_fig.png" alt="alt text", width="400" height="300">
 </p>
 
 ## References
