@@ -170,14 +170,16 @@ pip install -r requirements.txt
 
 
 ## Results - Combining with robust training method
-
+1. Results on different folds
 <center>
 <img src="./Results/combine_fig.png" alt="alt text", width="400" height="300">
 </center>
 
+2. Overall results
 <p float="middle">
 <img src="./Results/combine_tab.png" alt="alt text">
 </p>
+
 
 ## References
 [1]: Yao, H., Choi, C., Lee, Y., Koh, P. W., and Finn, C.
