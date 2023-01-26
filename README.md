@@ -171,12 +171,12 @@ pip install -r requirements.txt
 
 ## Results - Combining with robust training method
 
-<p float="middle">
-<img src="./Results/combine_tab.png" alt="alt text">
-</p>
+<center>
+<img src="./Results/combine_fig.png" alt="alt text", width="400" height="300">
+</center>
 
 <p float="middle">
-<img src="./Results/combine_fig.png" alt="alt text", width="400" height="300">
+<img src="./Results/combine_tab.png" alt="alt text">
 </p>
 
 ## References
