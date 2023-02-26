@@ -3,6 +3,10 @@
 <!-- ## **Notice**
 
 We will continue to verify the effectiveness of HyperTime on more datasets and learners and update the correponding results in the future in this page.  -->
+## **:fire: Notice**
+
+
+### :bangbang: (02/26/2023) We perform more experiments on Wilds-Time benchmark, and HyperTime is consistently better than ERM. The results are shown below. 
 
 ## Introduction
 
@@ -125,6 +129,17 @@ pip install -r requirements.txt
                                  --seed 0 \  
                                  --device 0 \
     ```    
+## More Results on Wilds-Time benchmark
+
+|                        | MIMIC-Readmission | MIMIC-Mortality | Huffpost  |     Arxiv | FMoW-Time |
+|------------------------|-------------------|-----------------|-----------|----------:|-----------|
+| Test-average-ERM       |       48.02       |      77.24      |   70.60   |   46.39   |   58.05   |
+| Test-worst-ERM         |       43.68       |      73.45      |   69.14   |   44.53   |   46.40   |
+| Test-average-HyperTime |     **54.81**     |    **78.26**    | **71.68** | **48.48** | **59.17** |
+| Test-worst-HyperTime   |     **51.44**     |    **74.52**    | **69.72** | **46.52** | **50.02** |
+
+*We report the results of ERM by running the official code of Wilds-Time.* 
+
 ## Results - Effectiveness
 
 1. **Results on tuning tree-based learners**
